@@ -1,6 +1,6 @@
 package com.silverscreen.borodin.service;
 
-import com.silverscreen.borodin.dao.HumanDao;
+import com.silverscreen.borodin.dao.CrudDao;
 import com.silverscreen.borodin.dao.HumanDaoImpl;
 import com.silverscreen.borodin.model.Human;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class HumanServiceImpl implements HumanService {
 
-  private HumanDao humanDao = HumanDaoImpl.getInstance();
+  private CrudDao<Human> humanDao = HumanDaoImpl.getInstance();
 
   @Override
   public List<Human> getAll() {

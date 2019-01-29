@@ -1,5 +1,4 @@
 com\silverscreen\borodin\controllers\HumanController$1.class
-com\silverscreen\borodin\dao\HumanDao.class
 com\silverscreen\borodin\dao\SQLConstants.class
 com\silverscreen\borodin\dao\ConnectionPool.class
 com\silverscreen\borodin\controllers\HumanController.class
@@ -7,6 +6,7 @@ com\silverscreen\borodin\controllers\HumanController$1$1.class
 com\silverscreen\borodin\model\Human$HumanBuilder.class
 com\silverscreen\borodin\dao\HumanDaoImpl.class
 com\silverscreen\borodin\MyApplication.class
+com\silverscreen\borodin\dao\CrudDao.class
 com\silverscreen\borodin\service\HumanServiceImpl.class
 com\silverscreen\borodin\controllers\MainController.class
 com\silverscreen\borodin\model\Human.class

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -98,9 +99,12 @@ public class MainController implements Initializable {
           if (event.getClickCount() == 2
               && humanTable.getSelectionModel().getSelectedItem() != null) {
             TreeItem<Human> human = humanTable.getSelectionModel().getSelectedItem();
-            if (simpleDateFormat
-                .format(human.getValue().getDate())
-                .equals(simpleDateFormat.format(new Date()))) {
+            Calendar now = Calendar.getInstance();
+            Calendar birthday = Calendar.getInstance();
+            now.setTime(new Date());
+            birthday.setTime(human.getValue().getDate());
+            if (now.get(Calendar.MONTH) == birthday.get(Calendar.MONTH)
+                && now.get(Calendar.DAY_OF_MONTH) == birthday.get(Calendar.DAY_OF_MONTH)) {
               showAlert(
                   Alert.AlertType.INFORMATION,
                   "Birthday!",
@@ -123,6 +127,7 @@ public class MainController implements Initializable {
       humanController.setCurrentHuman(human);
       stage.initModality(Modality.APPLICATION_MODAL);
       stage.setOpacity(1);
+      stage.setResizable(false);
       stage.setTitle("Human window");
       stage.setScene(new Scene(root));
       stage.showAndWait();

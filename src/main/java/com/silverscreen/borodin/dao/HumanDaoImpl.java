@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class HumanDaoImpl implements HumanDao {
+public class HumanDaoImpl implements CrudDao<Human> {
 
   private static HumanDaoImpl instance;
 
@@ -25,6 +25,7 @@ public class HumanDaoImpl implements HumanDao {
 
   private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
+  @Override
   public List<Human> getAll() {
     List<Human> humans = new ArrayList();
     try (Connection connection = ConnectionPool.getConnection(); ) {
@@ -46,11 +47,12 @@ public class HumanDaoImpl implements HumanDao {
     return humans;
   }
 
-  public void save(Human human) {
+  @Override
+  public void save(Human object) {
     try (Connection connection = ConnectionPool.getConnection()) {
       PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.INSERT_HUMAN);
-      preparedStatement.setString(1, human.getName());
-      preparedStatement.setString(2, simpleDateFormat.format(human.getDate()));
+      preparedStatement.setString(1, object.getName());
+      preparedStatement.setString(2, simpleDateFormat.format(object.getDate()));
       preparedStatement.execute();
       preparedStatement.close();
     } catch (SQLException e) {
@@ -58,12 +60,13 @@ public class HumanDaoImpl implements HumanDao {
     }
   }
 
-  public void update(Human human) {
+  @Override
+  public void update(Human object) {
     try (Connection connection = ConnectionPool.getConnection()) {
       PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.UPDATE_HUMAN);
-      preparedStatement.setString(1, human.getName());
-      preparedStatement.setString(2, simpleDateFormat.format(human.getDate()));
-      preparedStatement.setInt(3, human.getId());
+      preparedStatement.setString(1, object.getName());
+      preparedStatement.setString(2, simpleDateFormat.format(object.getDate()));
+      preparedStatement.setInt(3, object.getId());
       preparedStatement.execute();
       preparedStatement.close();
     } catch (SQLException e) {
@@ -71,6 +74,7 @@ public class HumanDaoImpl implements HumanDao {
     }
   }
 
+  @Override
   public void delete(int id) {
     try (Connection connection = ConnectionPool.getConnection()) {
       PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.DELETE_HUMAN);
