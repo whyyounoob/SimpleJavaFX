@@ -35,8 +35,8 @@ public class HumanDaoImpl implements CrudDao<Human> {
         Human human = new Human();
         human.setId(resultSet.getInt("id"));
         human.setName(resultSet.getString("name"));
-        human.setDate(simpleDateFormat.parse(resultSet.getString("birthday")));
-        human.setAge(calculateAge(human.getDate()));
+        human.setBirthday(simpleDateFormat.parse(resultSet.getString("birthday")));
+        human.setAge(calculateAge(human.getBirthday()));
         humans.add(human);
       }
       resultSet.close();
@@ -52,7 +52,7 @@ public class HumanDaoImpl implements CrudDao<Human> {
     try (Connection connection = ConnectionPool.getConnection()) {
       PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.INSERT_HUMAN);
       preparedStatement.setString(1, object.getName());
-      preparedStatement.setString(2, simpleDateFormat.format(object.getDate()));
+      preparedStatement.setString(2, simpleDateFormat.format(object.getBirthday()));
       preparedStatement.execute();
       preparedStatement.close();
     } catch (SQLException e) {
@@ -65,7 +65,7 @@ public class HumanDaoImpl implements CrudDao<Human> {
     try (Connection connection = ConnectionPool.getConnection()) {
       PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.UPDATE_HUMAN);
       preparedStatement.setString(1, object.getName());
-      preparedStatement.setString(2, simpleDateFormat.format(object.getDate()));
+      preparedStatement.setString(2, simpleDateFormat.format(object.getBirthday()));
       preparedStatement.setInt(3, object.getId());
       preparedStatement.execute();
       preparedStatement.close();

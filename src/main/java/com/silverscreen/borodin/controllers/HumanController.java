@@ -38,7 +38,7 @@ public class HumanController implements Initializable {
     } else {
       nameTextField.setText(currentHuman.getName());
       dateField.setValue(
-          currentHuman.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+          currentHuman.getBirthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
     }
   }
 
@@ -53,7 +53,7 @@ public class HumanController implements Initializable {
     } else {
       Human human =
           Human.builder()
-              .date(
+              .birthday(
                   Date.from(
                       dateField
                           .getValue()

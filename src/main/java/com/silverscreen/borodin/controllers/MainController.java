@@ -86,7 +86,7 @@ public class MainController implements Initializable {
     birthdayColumn.setCellValueFactory(
         param ->
             new SimpleStringProperty(
-                simpleDateFormat.format(param.getValue().getValue().getDate())));
+                simpleDateFormat.format(param.getValue().getValue().getBirthday())));
     humanService
         .getAll()
         .forEach(
@@ -102,7 +102,7 @@ public class MainController implements Initializable {
             Calendar now = Calendar.getInstance();
             Calendar birthday = Calendar.getInstance();
             now.setTime(new Date());
-            birthday.setTime(human.getValue().getDate());
+            birthday.setTime(human.getValue().getBirthday());
             if (now.get(Calendar.MONTH) == birthday.get(Calendar.MONTH)
                 && now.get(Calendar.DAY_OF_MONTH) == birthday.get(Calendar.DAY_OF_MONTH)) {
               showAlert(
